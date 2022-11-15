@@ -263,7 +263,7 @@ if add_sidebar=='Individual Hospital Data':
                                         'Waiting time: 4 to 12 hrs',
                                         'Waiting time : more than 12 hrs'))
     fig_8.update_layout(autosize=True)
-    
+    fig_8.update(layout_showlegend=False)
     fig_8.add_trace(go.Scatter(x=X1,y=Y1),row=1,col=1)
     fig_8.add_trace(go.Scatter(x=X1,y=Y2),row=1,col=2)
     fig_8.add_trace(go.Scatter(x=X1,y=Y3),row=2,col=1)
