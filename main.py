@@ -56,10 +56,9 @@ fig_1['layout']['xaxis3']['title']='Date'
 fig_1['layout']['xaxis4']['title']='Date'
 fig_1['layout']['yaxis']['title']='Number of Patients'
 fig_1['layout']['yaxis3']['title']='Number of Patients'
+
 # Admission to the hospital
 fig_2=go.Figure()
-
-#fig_2.add_trace(go.Scatter(x=x1,y=y1,name='A&E total attendance'))
 fig_2.add_trace(go.Scatter(x=x1,y=WholeNHSDataAE['AE_Attend_Type1'],name='A&E Type 1  attendance'))
 fig_2.add_trace(go.Scatter(x=x1,y=WholeNHSDataAE['AE_Attend_Type2'],name='A&E Type 2 attendance'))
 fig_2.add_trace(go.Scatter(x=x1,y=WholeNHSDataAE['AE_Attend_Type3'],name='A&E Type 3 attendance'))
@@ -76,8 +75,8 @@ fig_3['layout']['xaxis']['title']='Date'
 fig_3['layout']['yaxis']['title']='Number of Emergency Admissions'
 
 # Text are used in the dashboarsd
-HistoryText='By the end of World War II, the concept of an integrated, state-funded hospital service had become established and, in 1948, the newly-elected Labour (socialist) government created a National Health Service (NHS) as none of a series of welfare reforms designed to guarantee basic levels of personal and social security. The NHS belongs to the people. It is there to improve our health and well-being, supporting us to stay mentally and physically well, to get better when we are ill and, when we cannot fully recover, to stay as well as we can to the end of our lives. the NHS is revealed to be the fifth largest, with 1.7 million workers across England, Wales, Scotland and Northern Ireland. The NHS in England deals with over 1 million patients every 36 hours. '
-
+HistoryText='By the end of World War II, the concept of an integrated, state-funded hospital service had become established and, in 1948, the newly-elected Labour (socialist) government created a National Health Service (NHS) as none of a series of welfare reforms designed to guarantee basic levels of personal and social security. The NHS belongs to the people. It is there to improve our health and well-being, supporting us to stay mentally and physically well, to get better when we are ill and, when we cannot fully recover, to stay as well as we can to the end of our lives. the NHS is revealed to be the fifth largest, with **1.7 million workers** across England, Wales, Scotland and Northern Ireland. The NHS in England deals with over **1 million patients** every **36 hours**. '
+AandEText='An emergency department (ED), also known as an **accident and emergency department (A&E)**, emergency room (ER), emergency ward (EW) or casualty department, is a medical treatment facility specializing in emergency medicine, the acute care of patients who present without prior appointment; either by their own means or by that of an ambulance. The emergency department is usually found in a hospital or other primary care center. Due to the unplanned nature of patient attendance, the department must provide initial treatment for a broad spectrum of illnesses and injuries, some of which may be life-threatening and require immediate attention. These centres treat injuries and illnesses such as cuts, sprains and strains, broken bones, minor burns and scalds, minor head and eye injuries, bites and stings.'
 
 # build dashboard
 st.sidebar.write('The two analysis are perfomed')
@@ -89,23 +88,33 @@ add_sidebar=st.sidebar.selectbox('Select the whole UK NHS A&E Data or the indivi
 st.title('National Health Services')
 st.write(HistoryText)
 if add_sidebar=='NHS A&E Data':
-    st.title('A&E Data')
+    st.subheader('Accident & Emergency')
     
     # Descriptive ANalaysis of the A&E Data
-    st.write('The data, including monthly A&E attendeances and emergency' 
-             'admission, has obtained from NHS England site')
+    st.write(AandEText)
+    st.write('One of the biggest issue with the NHS A&E service is waiting time.'
+             'The four-hour A&E waiting time target is a pledge set out in the'
+             ' Handbook to the NHS Constitution. The operational standard is that'
+             ' at least **95%** of patients attending A&E should be admitted, transferred'
+             ' or discharged within four hours, however, recent review has shoon'
+             ' approximately **91%** have acheived. In order to study the A&E performance,'
+             ' i have obtained the data from the NHS england data. The data, '
+             'including monthly A&E attendeances and emergency admission, has'
+             ' obtained from NHS England site over period of 12 years from 01/08/2010. ')
        
     st.plotly_chart(fig_1,use_container_width=True)
     
+    st.subheader('Data Analysis')
+    st.write('The descriptive analysis of the data has performed to understand how the A&E performance has changed over the years. For in-depth analysis, the  time series analysis of the A&E attendance or emergency admission have performed to understand how the A&E performance have effected by the covid. ')
     # Time series analysis of each Data
-    DataType=st.selectbox('A&E Attendance or Emergency Admission',('A&E Attenedance','Emergency Admission'))
+    DataType=st.selectbox('Select A&E Attendance or Emergency Admission ',('A&E Attenedance','Emergency Admission'))
     
     if DataType=='A&E Attenedance':
         # Descriptive Analysis. 
         
         
         # Attendance data 
-        st.plotly_chart(fig_2)
+        st.plotly_chart(fig_2,use_container_width=True)
         
         # Time Series Analysis 
         y=WholeNHSDataAE['AE_Total_Attend']
