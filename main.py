@@ -75,13 +75,21 @@ fig_3.add_trace(go.Scatter(x=x1,y=y4,name='Waiting time more than 12hrs'))
 fig_3['layout']['xaxis']['title']='Date'
 fig_3['layout']['yaxis']['title']='Number of Emergency Admissions'
 
+# Text are used in the dashboarsd
+HistoryText='By the end of World War II, the concept of an integrated, state-funded hospital service had become established and, in 1948, the newly-elected Labour (socialist) government created a National Health Service (NHS) as none of a series of welfare reforms designed to guarantee basic levels of personal and social security. The NHS belongs to the people. It is there to improve our health and well-being, supporting us to stay mentally and physically well, to get better when we are ill and, when we cannot fully recover, to stay as well as we can to the end of our lives. the NHS is revealed to be the fifth largest, with 1.7 million workers across England, Wales, Scotland and Northern Ireland. The NHS in England deals with over 1 million patients every 36 hours. '
+
 
 # build dashboard
-add_sidebar=st.sidebar.selectbox('Whole or individual NHS A&E Data',('NHS A&E Data','Individual Hospital Data'))
+st.sidebar.write('The two analysis are perfomed')
+add_sidebar=st.sidebar.selectbox('Select the whole UK NHS A&E Data or the individula Hopital Data',
+                                 ('NHS A&E Data','Individual Hospital Data'))
+
 
 # Whole Data analysis
+st.title('National Health Services')
+st.write(HistoryText)
 if add_sidebar=='NHS A&E Data':
-    st.title('NHS UK A&E Data')
+    st.title('A&E Data')
     
     # Descriptive ANalaysis of the A&E Data
     st.write('The data, including monthly A&E attendeances and emergency' 
